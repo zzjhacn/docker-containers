@@ -1,0 +1,86 @@
+redis-master:
+  environment:
+    password: ry123456
+    port: '60379'
+  restart: always
+  privileged: true
+  image: docker.raytest.com/redis-ha
+  volumes:
+    - /opt/docker/data/redis/master/data:/data:rw
+  net: host
+  command:
+    - master
+
+redis-slaves-1:
+  restart: always
+  privileged: true
+  image: docker.raytest.com/redis-ha
+  environment:
+    master_port: '60379'
+    master_host: localhost
+    password: ry123456
+    master_password: ry123456
+    port: '61379'
+  volumes:
+    - /opt/docker/data/redis/slave1/data:/data:rw
+  command:
+    - slave
+  net: host
+
+redis-slaves-2:
+  restart: always
+  privileged: true
+  image: docker.raytest.com/redis-ha
+  environment:
+    master_port: '60379'
+    master_host: localhost
+    password: ry123456
+    master_password: ry123456
+    port: '62379'
+  volumes:
+    - /opt/docker/data/redis/slave2/data:/data:rw
+  command:
+    - slave
+  net: host
+
+redis-sentinels-1:
+  restart: always
+  privileged: true
+  image: docker.raytest.com/redis-ha
+  environment:
+    master_port: '60379'
+    master_host: 192.168.6.5
+    sentinel_port: '61380'
+  command:
+    - sentinel
+  volumes:
+    - /opt/docker/data/redis/sentinel1/data:/data:rw
+  net: host
+
+redis-sentinels-2:
+  restart: always
+  privileged: true
+  image: docker.raytest.com/redis-ha
+  environment:
+    master_port: '60379'
+    master_host: 192.168.6.5
+    sentinel_port: '62380'
+  command:
+    - sentinel
+  volumes:
+    - /opt/docker/data/redis/sentinel2/data:/data:rw
+  net: host
+
+redis-sentinels-3:
+  restart: always
+  privileged: true
+  image: docker.raytest.com/redis-ha
+  environment:
+    master_port: '60379'
+    master_host: 192.168.6.5
+    sentinel_port: '63380'
+  command:
+    - sentinel
+  volumes:
+    - /opt/docker/data/redis/sentinel3/data:/data:rw
+  net: host

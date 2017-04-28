@@ -1,0 +1,11 @@
+mongo:
+  restart: always
+  privileged: true
+  image: mongo
+  environment:
+    - character-set-server=utf8
+  volumes:
+    - /opt/docker/data/mongo/data:/data/db:rw
+    - /opt/docker/data/mongo/config:/data/configdb:rw
+  ports:
+    - "27017:27017"

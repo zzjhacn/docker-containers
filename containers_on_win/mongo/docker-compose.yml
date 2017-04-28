@@ -1,0 +1,13 @@
+mongo:
+  restart: always
+  privileged: true
+  image: mongo
+  environment:
+    - character-set-server=utf8
+  #volumes:
+    #- d:/docker/data/mongo/data:/data/db:rw
+    #- d:/docker/data/mongo/config:/data/config:rw
+    #mongo db 不支持此类文件系统
+    #MongoDB requires a filesystem that supports fsync() on directories. For example, HGFS and Virtual Box’s shared folders [do not] support this operation.
+  ports:
+    - "27017:27017"

@@ -1,0 +1,97 @@
+version: "2.0"
+services:
+  redis-0:
+    environment:
+      password: ry123456
+    restart: always
+    privileged: true
+    image: docker.raytest.com/redis-cluster
+    volumes:
+      - /opt/docker/data/redis/redis-0/data:/data:rw
+    ports:
+      - "60379:6379"
+
+  redis-1:
+    environment:
+      password: ry123456
+    restart: always
+    privileged: true
+    image: docker.raytest.com/redis-cluster
+    volumes:
+      - /opt/docker/data/redis/redis-1/data:/data:rw
+    ports:
+      - "61379:6379"
+
+  redis-2:
+    environment:
+      password: ry123456
+    restart: always
+    privileged: true
+    image: docker.raytest.com/redis-cluster
+    volumes:
+      - /opt/docker/data/redis/redis-2/data:/data:rw
+    ports:
+      - "62379:6379"
+
+  redis-3:
+    environment:
+      password: ry123456
+    restart: always
+    privileged: true
+    image: docker.raytest.com/redis-cluster
+    volumes:
+      - /opt/docker/data/redis/redis-3/data:/data:rw
+    ports:
+      - "63379:6379"
+
+  redis-4:
+    environment:
+      password: ry123456
+    restart: always
+    privileged: true
+    image: docker.raytest.com/redis-cluster
+    volumes:
+      - /opt/docker/data/redis/redis-4/data:/data:rw
+    ports:
+      - "64379:6379"
+
+  redis-5:
+    environment:
+      password: ry123456
+    restart: always
+    privileged: true
+    image: docker.raytest.com/redis-cluster
+    volumes:
+      - /opt/docker/data/redis/redis-5/data:/data:rw
+    ports:
+      - "65379:6379"
+
+  cluster:
+    image: redis-trib
+    environment:
+      ip0: '172.18.0.2'
+      ip1: '172.18.0.3'
+      ip2: '172.18.0.4'
+      ip3: '172.18.0.5'
+      ip4: '172.18.0.6'
+      ip5: '172.18.0.7'
+    links:
+      - redis-0:redis0
+      - redis-1:redis1
+      - redis-2:redis2
+      - redis-3:redis3
+      - redis-4:redis4
+      - redis-5:redis5
+    command:
+#    entrypoint: |
+#      bash -c 'bash -s <<EOF
+#      ping 172.18.0.2 -c 3
+#      telnet 172.18.0.2 6379
+      create --replicas 1 172.18.0.2:6379 172.18.0.3:6379 172.18.0.4:6379 172.18.0.5:6379 172.18.0.6:6379 172.18.0.7:6379
+#      EOF'
+#ip0=`ping redis0 -c 1 | grep seq=0 | awk \'{print $4}\' | awk -F ":" \'{print $1}\'`
+#ip1=`ping redis1 -c 1 | grep seq=0 | awk \'{print $4}\' | awk -F ":" \'{print $1}\'`
+#ip2=`ping redis2 -c 1 | grep seq=0 | awk \'{print $4}\' | awk -F ":" \'{print $1}\'`
+#ip3=`ping redis3 -c 1 | grep seq=0 | awk \'{print $4}\' | awk -F ":" \'{print $1}\'`
+#ip4=`ping redis4 -c 1 | grep seq=0 | awk \'{print $4}\' | awk -F ":" \'{print $1}\'`
+#ip5=`ping redis5 -c 1 | grep seq=0 | awk \'{print $4}\' | awk -F ":" \'{print $1}\'`

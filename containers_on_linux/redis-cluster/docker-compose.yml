@@ -1,0 +1,65 @@
+redis-0:
+  environment:
+    password: ry123456
+    port: '6037'
+  #restart: always
+  privileged: true
+  image: docker.raytest.com/redis-cluster
+  volumes:
+    - /opt/docker/data/redis/redis-0/data:/data:rw
+  net: host
+
+redis-1:
+  environment:
+    password: ry123456
+    port: '6137'
+  #restart: always
+  privileged: true
+  image: docker.raytest.com/redis-cluster
+  volumes:
+    - /opt/docker/data/redis/redis-1/data:/data:rw
+  net: host
+
+redis-2:
+  environment:
+    password: ry123456
+    port: '6237'
+  #restart: always
+  privileged: true
+  image: docker.raytest.com/redis-cluster
+  volumes:
+    - /opt/docker/data/redis/redis-2/data:/data:rw
+  net: host
+
+redis-3:
+  environment:
+    password: ry123456
+    port: '6337'
+  #restart: always
+  privileged: true
+  image: docker.raytest.com/redis-cluster
+  volumes:
+    - /opt/docker/data/redis/redis-3/data:/data:rw
+  net: host
+
+redis-4:
+  environment:
+    password: ry123456
+    port: '6437'
+  #restart: always
+  privileged: true
+  image: docker.raytest.com/redis-cluster
+  volumes:
+    - /opt/docker/data/redis/redis-4/data:/data:rw
+  net: host
+
+redis-5:
+  environment:
+    password: ry123456
+    port: '6537'
+  #restart: always
+  privileged: true
+  image: docker.raytest.com/redis-cluster
+  volumes:
+    - /opt/docker/data/redis/redis-5/data:/data:rw
+  net: host

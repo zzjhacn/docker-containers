@@ -1,0 +1,12 @@
+redis:
+  restart: always
+  privileged: true
+  image: redis:alpine
+  environment:
+    - port=6379
+  volumes:
+    - /opt/docker/data/redis/data:/data:rw
+  ports:
+    - "6379:6379"
+  command:
+    - "/data/redis.conf"

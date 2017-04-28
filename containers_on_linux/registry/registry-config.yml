@@ -1,0 +1,19 @@
+version: 0.1
+log:
+  level: info
+  formatter: text
+  fields:
+    service: registry-srv
+    environment: production
+storage:
+  cache:
+    layerinfo: inmemory
+  filesystem:
+    rootdirectory: /var/lib/registry
+  delete:
+    # 要在 ui 上能够删除镜像，enable 的值必须是 true
+    enabled: true
+http:
+  addr: :5000
+  debug:
+    addr: :5001 

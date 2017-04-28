@@ -1,0 +1,19 @@
+jenkins:
+  restart: always
+  privileged: true
+  image: jenkins
+  user: root
+  volumes:
+    - /docker_data/data/jenkins/data:/var/jenkins_home:rw
+    - /docker_data/data/jenkins/config/root:/root:rw
+  ports:
+    - "8080:8080"
+    - "50000:50000"
+  dns:
+    - "192.168.1.1"
+  entrypoint: |
+    bash -c 'bash -s <<EOF
+    cp /root/Shanghai /etc/localtime
+    echo 192.168.6.3 gitlab.raytest.com >> /etc/hosts
+    /bin/tini -- /usr/local/bin/jenkins.sh
+    EOF'

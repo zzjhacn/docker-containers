@@ -1,0 +1,21 @@
+sonarqube:
+  restart: always
+  privileged: true
+  image: sonarqube
+  environment:
+    - SONARQUBE_JDBC_USERNAME=sonar
+    - SONARQUBE_JDBC_PASSWORD=sonar@integ
+    - SONARQUBE_JDBC_URL=jdbc:mysql://mysql_mysql_1:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
+  external_links:
+    - mysql_mysql_1
+  volumes:
+    - /opt/docker/data/sonarqube/data:/opt/sonarqube/data:rw
+    # /opt/docker/data/sonarqube/config:/opt/sonarqube/conf:ro
+    - /opt/docker/data/sonarqube/extensions:/opt/sonarqube/extensions:rw
+  ports:
+    - "0.0.0.0:9000:9000"
+#  entrypoint: |
+  #  bash -c 'bash -s <<EOF
+  #  trap "break;exit" SIGHUP SIGINT SIGTERM
+  #  ping 192.168.6.4 -c 3 && ./bin/run.sh
+  #  EOF'

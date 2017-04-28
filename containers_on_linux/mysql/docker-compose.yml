@@ -1,0 +1,15 @@
+mysql:
+  restart: always
+  privileged: true
+  image: mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=zzj1234
+    - MYSQL_USER=gray
+    - MYSQL_PASSWORD=123456
+    - character-set-server=utf8
+    - collation-server=utf8_unicode_ci
+  volumes:
+    - /opt/docker/data/mysql/data:/var/lib/mysql:rw
+    - /opt/docker/data/mysql/config:/etc/mysql/conf.d:ro
+  ports:
+    - "3306:3306"

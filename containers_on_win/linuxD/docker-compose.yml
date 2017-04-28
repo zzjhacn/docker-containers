@@ -1,0 +1,10 @@
+linuxD:
+  restart: always
+  stdin_open: true
+  tty: true
+  privileged: true
+  image: alpine
+  volumes:
+    - d:/:/D:rw
+  command:
+    - "/bin/sh"
