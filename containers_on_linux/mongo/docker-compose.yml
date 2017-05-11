@@ -9,3 +9,5 @@ mongo:
     - /opt/docker/data/mongo/config:/data/configdb:rw
   ports:
     - "27017:27017"
+
+# db.createUser({ user: 'rayingMongo', pwd: 'mongo@raying123', roles: [ { role: "userAdminAnyDatabase", db: "monitor" } ] });
